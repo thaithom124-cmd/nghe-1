@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 1 - Exercise 8: Listening Practice</title>
+    <!-- Nhúng Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================================================
+           1. CẤU HÌNH BIẾN & RESET CSS
+           ========================================================================== */
+        :root {
+            --bg-gradient: linear-gradient(135deg, #2e0854 0%, #1a0536 100%);
+            --header-bg: linear-gradient(135deg, #d81b60 0%, #8e24aa 100%);
+            --card-bg: #ffffff;
+            --text-color: #2c3e50;
+            --accent-pink: #d81b60;
+            --accent-yellow: #ffeb3b;
+            --border-pink: #f8bbd0;
+            --btn-blue-bg: #e3f2fd;
+            --btn-blue-hover: #bbdefb;
+            --btn-green-bg: #e8f5e9;
+            --btn-green-border: #4caf50;
+            --btn-red-bg: #ffebee;
+            --btn-red-border: #f44336;
+            --vocab-bg: #fffde7;
+            --shadow: 0 8px 24px rgba(0,0,0,0.15);
+            --radius: 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-color);
+            min-height: 100vh;
+            padding: 20px 10px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* ==========================================================================
+           2. HEADER & TRÌNH PHÁT ÂM THANH
+           ========================================================================== */
+        .header-card {
+            background: var(--header-bg);
+            border-radius: var(--radius);
+            padding: 25px 20px;
+            text-align: center;
+            color: #ffffff;
+            box-shadow: var(--shadow);
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-card h1 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .header-card h2 {
+            font-size: 1.3rem;
+            color: var(--accent-yellow);
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .header-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.15);
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 50px;
+            margin-bottom: 15px;
+        }
+
+        .instruction-box {
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: left;
+            margin-top: 15px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .instruction-box p strong {
+            color: var(--accent-pink);
+        }
+
+        .audio-container {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            padding: 15px;
+            border-radius: 15px;
+            margin-top: 15px;
+        }
+
+        .audio-container audio {
+            width: 100%;
+            height: 45px;
+            outline: none;
+            border-radius: 10px;
+        }
+
+        .audio-controls-extra {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .btn-audio-ctrl {
+            background: #ffffff;
+            color: var(--text-color);
+            border: none;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .btn-audio-ctrl:hover {
+            background: var(--accent-yellow);
+            transform: translateY(-2px);
+        }
+
+        .audio-hint {
+            font-size: 0.85rem;
+            color: #fff;
+            margin-top: 8px;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        /* ==========================================================================
+           3. THANH TIẾN ĐỘ
+           ========================================================================== */
+        .progress-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: #4a148c;
+            font-size: 0.95rem;
+        }
+
+        .progress-bar-outer {
+            width: 100%;
+            height: 12px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar-inner {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #8e24aa, #d81b60);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        /* ==========================================================================
+           4. DANH SÁCH CÂU HỎI
+           ========================================================================== */
+        .question-card {
+            background: var(--card-bg);
+            border: 2px solid var(--border-pink);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .question-card.highlight-error {
+            border: 3px solid #fbc02d;
+            box-shadow: 0 0 15px rgba(251, 192, 45, 0.6);
+            animation: pulse 1s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.01); }
+        }
+
+        .question-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .question-number {
+            background: #8e24aa;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            flex-shrink: 0;
+            font-size: 0.95rem;
+        }
+
+        .question-statement {
+            font-size: 1.05rem;
+            font-weight: 700;
+            line-height: 1.5;
+            color: #1a237e;
+            padding-top: 2px;
+        }
+
+        .options-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .btn-option {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #b3e5fc;
+            background: var(--btn-blue-bg);
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 1rem;
+            color: #0277bd;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .btn-option:hover:not(:disabled) {
+            background: var(--btn-blue-hover);
+        }
+
+        .btn-option.selected-true {
+            background: var(--btn-green-bg);
+            border-color: var(--btn-green-border);
+            color: #2e7d32;
+        }
+
+        .btn-option.selected-false {
+            background: var(--btn-red-bg);
+            border-color: var(--btn-red-border);
+            color: #c62828;
+        }
+
+        .btn-option:disabled {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        /* Khối hiển thị kết quả & giải thích chi tiết sau khi nộp */
+        .feedback-box {
+            display: none;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px dashed #e0e0e0;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .status-badge.correct {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status-badge.incorrect {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .answer-comparison {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .translation-box {
+            background: #f3e5f5;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            color: #4a148c;
+            margin-bottom: 15px;
+        }
+
+        .btn-toggle-vocab {
+            background: #7b1fa2;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        /* Bảng từ vựng responsive */
+        .vocab-container {
+            margin-top: 10px;
+            overflow-x: auto;
+        }
+
+        .vocab-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--vocab-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            font-size: 0.88rem;
+        }
+
+        .vocab-table th, .vocab-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #fff59d;
+            vertical-align: middle;
+        }
+
+        .vocab-table th {
+            background: #fff59d;
+            color: #f57f17;
+            font-weight: 800;
+        }
+
+        .btn-audio-speak {
+            background: #fbc02d;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 5px;
+            transition: transform 0.1s;
+        }
+
+        .btn-audio-speak:active {
+            transform: scale(0.9);
+        }
+
+        /* Card view từ vựng cho màn hình nhỏ (Mobile) */
+        @media (max-width: 600px) {
+            .vocab-table, .vocab-table tbody, .vocab-table tr, .vocab-table td {
+                display: block;
+                width: 100%;
+            }
+            .vocab-table thead {
+                display: none;
+            }
+            .vocab-table tr {
+                margin-bottom: 10px;
+                border: 1px solid #fff59d;
+                border-radius: 8px;
+                padding: 8px;
+                background: #fffde7;
+            }
+            .vocab-table td {
+                border: none;
+                padding: 4px 6px;
+            }
+            .vocab-table td:nth-child(1) {
+                font-weight: 800;
+                color: #d81b60;
+                font-size: 0.95rem;
+            }
+        }
+
+        /* ==========================================================================
+           5. BẢNG KẾT QUẢ & CÁC NÚT ĐIỀU KHIỂN
+           ========================================================================== */
+        .btn-submit-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #00c853 0%, #64dd17 100%);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            font-size: 1.2rem;
+            font-weight: 900;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 200, 83, 0.6);
+        }
+
+        .result-card {
+            display: none;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 25px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            border: 3px solid var(--accent-pink);
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-card h2 {
+            font-size: 1.6rem;
+            color: #8e24aa;
+            margin-bottom: 15px;
+            font-weight: 900;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .result-item {
+            background: #f3e5f5;
+            padding: 12px;
+            border-radius: 12px;
+        }
+
+        .result-item .label {
+            font-size: 0.85rem;
+            color: #6a1b9a;
+            font-weight: 700;
+        }
+
+        .result-item .val {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: #4a148c;
+            margin-top: 4px;
+        }
+
+        .control-btns-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn-action {
+            background: #ffffff;
+            border: 2px solid #8e24aa;
+            color: #8e24aa;
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-action:hover {
+            background: #8e24aa;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .alert-box {
+            display: none;
+            background: #fff3e0;
+            color: #e65100;
+            padding: 12px 20px;
+            border-radius: 10px;
+            border-left: 5px solid #ff9800;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        /* Tối ưu hóa trên Mobile */
+        @media (max-width: 480px) {
+            .header-card h1 { font-size: 1.4rem; }
+            .header-card h2 { font-size: 1.1rem; }
+            .options-container { flex-direction: row; }
+            .btn-action { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- ==========================================================================
+       HEADER & AUDIO PLAYER
+       ========================================================================== -->
+    <header class="header-card">
+        <h1>🎧 UNIT 1 – EXERCISE 8</h1>
+        <h2>A LONG AND HEALTHY LIFE</h2>
+        <h3>LISTENING PRACTICE – SELF-CARE AND HEALTHY LIFESTYLES</h3>
+        
+        <div class="instruction-box">
+            <p><strong>Yêu cầu bài tập:</strong> Listen to a conversation about self-care and healthy lifestyles. Decide whether the following statements are TRUE or FALSE.</p>
+            <p style="margin-top: 5px;"><strong>Hướng dẫn:</strong> 🎧 Nghe đoạn hội thoại, chọn TRUE hoặc FALSE cho cả 5 câu, sau đó nhấn <strong>‘NỘP BÀI – XEM KẾT QUẢ’</strong>.</p>
+        </div>
+
+        <div class="audio-container">
+            <audio id="listeningAudio" controls preload="metadata">
+                <source src="AUDIO LISTENING UNIT 1 A LONG HEALTHY LIFE - EXERCISE 8.mp3" type="audio/mpeg">
+                Trình duyệt của bạn không hỗ trợ phát âm thanh.
+            </audio>
+            <div class="audio-controls-extra">
+                <button class="btn-audio-ctrl" onclick="rewindAudio(10)">⏪ Tua 10s</button>
+                <button class="btn-audio-ctrl" onclick="restartAudio()">🔄 Nghe lại từ đầu</button>
+            </div>
+            <p class="audio-hint">Click Play to listen to the conversation.</p>
+        </div>
+    </header>
+
+    <!-- ==========================================================================
+       THANH TIẾN ĐỘ
+       ========================================================================== -->
+    <div class="progress-card">
+        <div class="progress-text">
+            <span id="progressLabel">Đã hoàn thành: 0/5 câu</span>
+            <span id="progressPercent">0%</span>
+        </div>
+        <div class="progress-bar-outer">
+            <div class="progress-bar-inner" id="progressBar"></div>
+        </div>
+    </div>
+
+    <!-- Thông báo nhắc nhở khi chưa làm hết -->
+    <div class="alert-box" id="alertBox">
+        ⚠️ Bạn chưa hoàn thành tất cả các câu hỏi. Hãy kiểm tra lại nhé!
+    </div>
+
+    <!-- ==========================================================================
+       DANH SÁCH CÂU HỎI (Render từ JavaScript)
+       ========================================================================== -->
+    <main id="quizContainer"></main>
+
+    <!-- Nút nộp bài -->
+    <div class="btn-submit-container">
+        <button class="btn-submit" id="btnSubmit" onclick="submitQuiz()">✓ NỘP BÀI – XEM KẾT QUẢ</button>
+    </div>
+
+    <!-- ==========================================================================
+       BẢNG KẾT QUẢ & CÁC NÚT HÀNH ĐỘNG
+       ========================================================================== -->
+    <section class="result-card" id="resultCard">
+        <h2>🏆 KẾT QUẢ CỦA BẠN</h2>
+        <div class="result-grid">
+            <div class="result-item">
+                <div class="label">Đúng</div>
+                <div class="val" id="resCorrect">0/5</div>
+            </div>
+            <div class="result-item">
+                <div class="label">Sai</div>
+                <div class="val" id="resIncorrect">0/5</div>
+            </div>
+            <div class="result-item">
+                <div class="label">Điểm số</div>
+                <div class="val" id="resScore">0/10</div>
+            </div>
+            <div class="result-item">
+                <div class="label">Tỷ lệ đúng</div>
+                <div class="val" id="resAccuracy">0%</div>
+            </div>
+            <div class="result-item" style="grid-column: span 2;">
+                <div class="label">Thời gian làm bài</div>
+                <div class="val" id="resTime">00:00</div>
+            </div>
+        </div>
+
+        <div class="control-btns-grid">
+            <button class="btn-action" onclick="resetQuiz()">🔄 LÀM LẠI</button>
+            <button class="btn-action" onclick="replayAudioFromStart()">🎧 NGHE LẠI</button>
+            <button class="btn-action" onclick="toggleAllVocab(true)">📖 XEM TỪ VỰNG</button>
+            <button class="btn-action" onclick="toggleAllVocab(false)">🙈 ẨN TỪ VỰNG</button>
+            <button class="btn-action" onclick="clearSavedData()">🗑️ XÓA BÀI ĐÃ LƯU</button>
+            <button class="btn-action" onclick="toggleFullScreen()">⛶ TOÀN MÀN HÌNH</button>
+        </div>
+    </section>
+
+</div>
+
+<!-- ==========================================================================
+   MÃ NGUỒN JAVASCRIPT XỬ LÝ LOGIC
+   ========================================================================== -->
+<script>
+/* ==========================================================================
+   1. DỮ LIỆU BÀI HỌC (QUESTIONS ARRAY)
+   ========================================================================== */
+const questions = [
+    {
+        id: 1,
+        statement: "Randall thinks that both mental and physical health contribute to a person’s quality of life.",
+        correctAnswer: true,
+        translation: "Randall cho rằng cả sức khỏe tinh thần lẫn sức khỏe thể chất đều góp phần tạo nên chất lượng cuộc sống của một người.",
+        vocabulary: [
+            { term: "mental health", ipa: "/ˌmen.təl ˈhelθ/", meaning: "sức khỏe tinh thần", explanation: "Trạng thái cảm xúc, tâm lý và khả năng ứng phó với những khó khăn trong cuộc sống." },
+            { term: "physical health", ipa: "/ˈfɪz.ɪ.kəl helθ/", meaning: "sức khỏe thể chất", explanation: "Tình trạng sức khỏe của cơ thể." },
+            { term: "contribute to", ipa: "/kənˈtrɪb.juːt tuː/", meaning: "góp phần vào", explanation: "Giúp tạo nên hoặc dẫn đến một kết quả." },
+            { term: "quality of life", ipa: "/ˌkwɒl.ə.ti əv ˈlaɪf/", meaning: "chất lượng cuộc sống", explanation: "Mức độ khỏe mạnh, thoải mái và hài lòng của một người trong cuộc sống." }
+        ]
+    },
+    {
+        id: 2,
+        statement: "Emily believes that people usually underestimate the importance of taking care of themselves.",
+        correctAnswer: true,
+        translation: "Emily cho rằng mọi người thường đánh giá thấp tầm quan trọng của việc chăm sóc bản thân.",
+        vocabulary: [
+            { term: "believe", ipa: "/bɪˈliːv/", meaning: "tin rằng, cho rằng", explanation: "Giữ một quan điểm hoặc tin vào điều gì đó." },
+            { term: "underestimate", ipa: "/ˌʌn.dərˈes.tɪ.meɪt/", meaning: "đánh giá thấp", explanation: "Cho rằng một điều gì đó ít quan trọng hoặc có giá trị thấp hơn thực tế." },
+            { term: "importance", ipa: "/ɪmˈpɔː.təns/", meaning: "tầm quan trọng", explanation: "Mức độ có ý nghĩa hoặc ảnh hưởng lớn." },
+            { term: "take care of oneself", ipa: "/teɪk keər əv wʌnˈself/", meaning: "chăm sóc bản thân", explanation: "Chú ý đến sức khỏe thể chất, tinh thần và nhu cầu cá nhân của chính mình." }
+        ]
+    },
+    {
+        id: 3,
+        statement: "Emily admits that constantly focusing on work has made her completely satisfied with her lifestyle.",
+        correctAnswer: false,
+        translation: "Emily thừa nhận rằng việc liên tục tập trung vào công việc đã khiến cô hoàn toàn hài lòng với lối sống của mình.",
+        vocabulary: [
+            { term: "admit", ipa: "/ədˈmɪt/", meaning: "thừa nhận", explanation: "Công nhận một điều là đúng, đôi khi đó là điều khó nói hoặc không có lợi cho bản thân." },
+            { term: "constantly", ipa: "/ˈkɒn.stənt.li/", meaning: "liên tục, không ngừng", explanation: "Diễn ra một cách đều đặn, không gián đoạn." },
+            { term: "focus on", ipa: "/ˈfəʊ.kəs ɒn/", meaning: "tập trung vào", explanation: "Dành sự chú ý đặc biệt cho một việc gì đó." },
+            { term: "completely satisfied", ipa: "/kəmˈpliːt.li ˈsæt.ɪs.faɪd/", meaning: "hoàn toàn hài lòng", explanation: "Cảm thấy hoàn toàn thỏa mãn, không đòi hỏi gì thêm." },
+            { term: "lifestyle", ipa: "/ˈlaɪf.staɪl/", meaning: "lối sống", explanation: "Cách một người sống, làm việc, ăn uống, nghỉ ngơi và sinh hoạt hằng ngày." }
+        ]
+    },
+    {
+        id: 4,
+        statement: "According to Emily, self-care activities should be carefully included in daily routines instead of being done randomly.",
+        correctAnswer: true,
+        translation: "Theo Emily, các hoạt động chăm sóc bản thân nên được sắp xếp hợp lý trong thói quen hằng ngày thay vì được thực hiện một cách ngẫu hứng.",
+        vocabulary: [
+            { term: "according to", ipa: "/əˈkɔː.dɪŋ tuː/", meaning: "theo như, theo lời của", explanation: "Dùng để trích dẫn ý kiến hoặc nguồn thông tin." },
+            { term: "self-care activities", ipa: "/ˌselfˈkeər ækˈtɪv.ə.tiz/", meaning: "các hoạt động chăm sóc bản thân", explanation: "Những hoạt động giúp bảo vệ và cải thiện sức khỏe thể chất hoặc tinh thần." },
+            { term: "include", ipa: "/ɪnˈkluːd/", meaning: "bao gồm; đưa vào", explanation: "Đưa một phần vào trong tổng thể." },
+            { term: "daily routine", ipa: "/ˈdeɪ.li ruːˈtiːn/", meaning: "thói quen hằng ngày", explanation: "Lịch trình công việc hoặc sinh hoạt lặp đi lặp lại mỗi ngày." },
+            { term: "instead of", ipa: "/ɪnˈsted əv/", meaning: "thay vì", explanation: "Thay thế cho một lựa chọn khác." },
+            { term: "randomly", ipa: "/ˈræn.dəm.li/", meaning: "một cách ngẫu nhiên, ngẫu hứng", explanation: "Thực hiện không có kế hoạch, ý định hoặc quy luật trước." }
+        ]
+    },
+    {
+        id: 5,
+        statement: "Emily suggests that quiet leisure activities can help people mentally escape from pressure and stress for a short time.",
+        correctAnswer: true,
+        translation: "Emily cho rằng các hoạt động giải trí yên tĩnh có thể giúp con người tạm thời thoát khỏi áp lực và căng thẳng về mặt tinh thần.",
+        vocabulary: [
+            { term: "suggest", ipa: "/səˈdʒest/", meaning: "đề xuất; cho rằng", explanation: "Đưa ra ý kiến hoặc giải pháp để xem xét." },
+            { term: "quiet leisure activities", ipa: "/ˈkwaɪ.ət ˈleʒ.ər ækˈtɪv.ə.tiz/", meaning: "các hoạt động giải trí yên tĩnh", explanation: "Ví dụ: đọc sách, nghe nhạc nhẹ, thiền hoặc đi dạo." },
+            { term: "mentally", ipa: "/ˈmen.təl.i/", meaning: "về mặt tinh thần, trong tâm trí", explanation: "Liên quan đến trí óc và nhận thức." },
+            { term: "escape from", ipa: "/ɪˈskeɪp frɒm/", meaning: "thoát khỏi, tạm quên đi", explanation: "Thoát khỏi một tình huống khó chịu hoặc áp lực." },
+            { term: "pressure", ipa: "/ˈpreʃ.ər/", meaning: "áp lực", explanation: "Cảm giác bị đè nặng bởi công việc hoặc trách nhiệm." },
+            { term: "stress", ipa: "/stres/", meaning: "sự căng thẳng", explanation: "Trạng thái mệt mỏi về thần kinh do áp lực." },
+            { term: "for a short time", ipa: "/fər ə ʃɔːt taɪm/", meaning: "trong khoảng thời gian ngắn, tạm thời", explanation: "Diễn ra trong chốc lát, không kéo dài." }
+        ]
+    }
+];
+
+/* ==========================================================================
+   2. BIẾN TRẠNG THÁI TOÀN CỤC
+   ========================================================================== */
+let userAnswers = {}; // Lưu đáp án học sinh: { 1: true, 2: false, ... }
+let isSubmitted = false;
+let startTime = null;
+let timerInterval = null;
+let elapsedTime = 0; // Số giây làm bài
+const STORAGE_KEY = 'unit1Exercise8Listening';
+
+/* ==========================================================================
+   3. KHỞI TẠO BÀI HỌC (INIT)
+   ========================================================================== */
+document.addEventListener('DOMContentLoaded', () => {
+    renderQuiz();
+    loadLocalStorage();
+    startTimer();
+});
+
+// Bắt đầu đếm thời gian
+function startTimer() {
+    if (!startTime) startTime = Date.now();
+    timerInterval = setInterval(() => {
+        if (!isSubmitted) {
+            elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+        }
+    }, 1000);
+}
+
+// Render danh sách giao diện câu hỏi
+function renderQuiz() {
+    const container = document.getElementById('quizContainer');
+    container.innerHTML = '';
+
+    questions.forEach((q) => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.id = `qCard_${q.id}`;
+
+        let vocabRows = q.vocabulary.map(v => `
+            <tr>
+                <td>
+                    ${v.term}
+                    <button class="btn-audio-speak" onclick="speakText('${v.term.replace(/'/g, "\\'")}')" title="Nghe phát âm">🔊</button>
+                </td>
+                <td style="color: #6a1b9a; font-family: monospace;">${v.ipa}</td>
+                <td style="font-weight: 700;">${v.meaning}</td>
+                <td>${v.explanation}</td>
+            </tr>
+        `).join('');
+
+        card.innerHTML = `
+            <div class="question-header">
+                <div class="question-number">${q.id}</div>
+                <div class="question-statement">${q.statement}</div>
+            </div>
+            
+            <div class="options-container">
+                <button class="btn-option" id="btn_${q.id}_true" onclick="selectAnswer(${q.id}, true)">TRUE</button>
+                <button class="btn-option" id="btn_${q.id}_false" onclick="selectAnswer(${q.id}, false)">FALSE</button>
+            </div>
+
+            <div class="feedback-box" id="feedback_${q.id}">
+                <div class="status-badge" id="statusBadge_${q.id}"></div>
+                <div class="answer-comparison" id="ansComp_${q.id}"></div>
+                <div class="translation-box">
+                    <strong>Bản dịch:</strong> “${q.translation}”
+                </div>
+                <button class="btn-toggle-vocab" onclick="toggleSingleVocab(${q.id})">📖 ẨN/HIỆN GIẢI THÍCH TỪ VỰNG</button>
+                <div class="vocab-container" id="vocabContainer_${q.id}">
+                    <table class="vocab-table">
+                        <thead>
+                            <tr>
+                                <th>Word/Phrase</th>
+                                <th>IPA</th>
+                                <th>Vietnamese Meaning</th>
+                                <th>Explanation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${vocabRows}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+/* ==========================================================================
+   4. TƯƠNG TÁC LỰA CHỌN ĐÁP ÁN & TIẾN ĐỘ
+   ========================================================================== */
+function selectAnswer(questionId, value) {
+    if (isSubmitted) return; // Khóa lựa chọn sau khi nộp bài
+
+    userAnswers[questionId] = value;
+    
+    // Cập nhật class giao diện nút
+    const btnTrue = document.getElementById(`btn_${questionId}_true`);
+    const btnFalse = document.getElementById(`btn_${questionId}_false`);
+
+    btnTrue.classList.remove('selected-true', 'selected-false');
+    btnFalse.classList.remove('selected-true', 'selected-false');
+
+    if (value === true) {
+        btnTrue.classList.add('selected-true');
+    } else {
+        btnFalse.classList.add('selected-false');
+    }
+
+    // Xóa cảnh báo viền vàng nếu có
+    document.getElementById(`qCard_${questionId}`).classList.remove('highlight-error');
+    document.getElementById('alertBox').style.display = 'none';
+
+    updateProgressBar();
+    saveLocalStorage();
+}
+
+function updateProgressBar() {
+    const answeredCount = Object.keys(userAnswers).length;
+    const total = questions.length;
+    const percent = Math.round((answeredCount / total) * 100);
+
+    document.getElementById('progressLabel').innerText = `Đã hoàn thành: ${answeredCount}/${total} câu`;
+    document.getElementById('progressPercent').innerText = `${percent}%`;
+    document.getElementById('progressBar').style.width = `${percent}%`;
+}
+
+/* ==========================================================================
+   5. NỘP BÀI VÀ CHẤM ĐIỂM
+   ========================================================================== */
+function submitQuiz() {
+    if (isSubmitted) return;
+
+    // Kiểm tra đủ 5 câu chưa
+    let firstUnanswered = null;
+    for (let q of questions) {
+        if (userAnswers[q.id] === undefined) {
+            firstUnanswered = q.id;
+            break;
+        }
+    }
+
+    if (firstUnanswered !== null) {
+        // Hiển thị alert & highlight câu chưa làm
+        const alertBox = document.getElementById('alertBox');
+        alertBox.style.display = 'block';
+        
+        const cardTarget = document.getElementById(`qCard_${firstUnanswered}`);
+        cardTarget.classList.add('highlight-error');
+        cardTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+    }
+
+    // Xác nhận chấm điểm
+    isSubmitted = true;
+    clearInterval(timerInterval);
+
+    let correctCount = 0;
+
+    questions.forEach((q) => {
+        const uAns = userAnswers[q.id];
+        const isCorrect = (uAns === q.correctAnswer);
+        if (isCorrect) correctCount++;
+
+        // Khóa các nút
+        const btnTrue = document.getElementById(`btn_${q.id}_true`);
+        const btnFalse = document.getElementById(`btn_${q.id}_false`);
+        btnTrue.disabled = true;
+        btnFalse.disabled = true;
+
+        // Đánh dấu đúng/sai lên các nút lựa chọn
+        if (q.correctAnswer === true) {
+            btnTrue.style.border = "3px solid #4caf50";
+        } else {
+            btnFalse.style.border = "3px solid #4caf50";
+        }
+
+        if (!isCorrect) {
+            if (uAns === true) btnTrue.style.border = "3px solid #f44336";
+            if (uAns === false) btnFalse.style.border = "3px solid #f44336";
+        }
+
+        // Hiển thị Feedback
+        const feedbackBox = document.getElementById(`feedback_${q.id}`);
+        feedbackBox.style.display = 'block';
+
+        const badge = document.getElementById(`statusBadge_${q.id}`);
+        badge.className = `status-badge ${isCorrect ? 'correct' : 'incorrect'}`;
+        badge.innerText = isCorrect ? '✓ Correct' : '✗ Incorrect';
+
+        const comp = document.getElementById(`ansComp_${q.id}`);
+        comp.innerHTML = `
+            <strong>Your answer:</strong> <span style="color: ${uAns ? '#2e7d32' : '#c62828'}; font-weight:800;">${uAns ? 'TRUE' : 'FALSE'}</span> | 
+            <strong>Correct answer:</strong> <span style="color: #2e7d32; font-weight:800;">${q.correctAnswer ? 'TRUE' : 'FALSE'}</span>
+        `;
+    });
+
+    // Cập nhật Bảng kết quả tổng quan
+    const totalCount = questions.length;
+    const incorrectCount = totalCount - correctCount;
+    const score = correctCount * 2; // Mỗi câu 2 điểm
+    const accuracy = Math.round((correctCount / totalCount) * 100);
+
+    document.getElementById('resCorrect').innerText = `${correctCount}/${totalCount}`;
+    document.getElementById('resIncorrect').innerText = `${incorrectCount}/${totalCount}`;
+    document.getElementById('resScore').innerText = `${score}/10`;
+    document.getElementById('resAccuracy').innerText = `${accuracy}%`;
+    document.getElementById('resTime').innerText = formatTime(elapsedTime);
+
+    // Dynamic màu điểm số
+    document.getElementById('resScore').style.color = score >= 8 ? '#2e7d32' : (score >= 5 ? '#f57f17' : '#c62828');
+
+    // Display Result Card & Scroll
+    const resultCard = document.getElementById('resultCard');
+    resultCard.style.display = 'block';
+    resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // Ẩn nút nộp bài
+    document.getElementById('btnSubmit').style.display = 'none';
+
+    saveLocalStorage();
+}
+
+/* ==========================================================================
+   6. LƯU & TRÍCH XUẤT LOCAL STORAGE
+   ========================================================================== */
+function saveLocalStorage() {
+    const data = {
+        userAnswers,
+        isSubmitted,
+        elapsedTime
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+function loadLocalStorage() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (!saved) return;
+
+    try {
+        const data = JSON.parse(saved);
+        userAnswers = data.userAnswers || {};
+        isSubmitted = data.isSubmitted || false;
+        elapsedTime = data.elapsedTime || 0;
+
+        // Phục hồi lựa chọn giao diện
+        Object.keys(userAnswers).forEach(qId => {
+            const val = userAnswers[qId];
+            const btnTrue = document.getElementById(`btn_${qId}_true`);
+            const btnFalse = document.getElementById(`btn_${qId}_false`);
+            if (btnTrue && btnFalse) {
+                if (val === true) btnTrue.classList.add('selected-true');
+                if (val === false) btnFalse.classList.add('selected-false');
+            }
+        });
+
+        updateProgressBar();
+
+        // Nếu đã nộp bài trước đó -> Chấm lại luôn
+        if (isSubmitted) {
+            isSubmitted = false; // Tạm set false để chạy hàm submit
+            submitQuiz();
+        }
+    } catch (e) {
+        console.error("Lỗi trích xuất LocalStorage:", e);
+    }
+}
+
+function clearSavedData() {
+    if (confirm("Bạn có chắc chắn muốn xóa bài làm đã lưu không?")) {
+        localStorage.removeItem(STORAGE_KEY);
+        location.reload();
+    }
+}
+
+/* ==========================================================================
+   7. CÁC TÍNH NĂNG ĐIỀU KHIỂN & TIỆN ÍCH
+   ========================================================================== */
+// Định dạng thời gian mm:ss
+function formatTime(seconds) {
+    const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+    const s = (seconds % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+}
+
+// Tua âm thanh
+function rewindAudio(sec) {
+    const audio = document.getElementById('listeningAudio');
+    audio.currentTime = Math.max(0, audio.currentTime - sec);
+}
+
+function restartAudio() {
+    const audio = document.getElementById('listeningAudio');
+    audio.currentTime = 0;
+    audio.play();
+}
+
+function replayAudioFromStart() {
+    restartAudio();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Đọc phát âm từ vựng qua Web Speech API
+function speakText(text) {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel(); // Dừng câu đang đọc nếu có
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.9;
+        window.speechSynthesis.speak(utterance);
+    } else {
+        alert("Trình duyệt của bạn không hỗ trợ tính năng phát âm tự động.");
+    }
+}
+
+// Ẩn / Hiện từ vựng
+function toggleSingleVocab(qId) {
+    const container = document.getElementById(`vocabContainer_${qId}`);
+    if (container.style.display === 'none') {
+        container.style.display = 'block';
+    } else {
+        container.style.display = 'none';
+    }
+}
+
+function toggleAllVocab(show) {
+    questions.forEach(q => {
+        const container = document.getElementById(`vocabContainer_${q.id}`);
+        if (container) {
+            container.style.display = show ? 'block' : 'none';
+        }
+    });
+}
+
+// Làm lại bài
+function resetQuiz() {
+    if (confirm("Bạn có muốn làm lại toàn bộ bài nghe này không?")) {
+        localStorage.removeItem(STORAGE_KEY);
+        location.reload();
+    }
+}
+
+// Bật / Tắt Toàn màn hình
+function toggleFullScreen() {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+            alert(`Không thể bật chế độ toàn màn hình: ${err.message}`);
+        });
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+    }
+}
+</script>
+</body>
+</html>
